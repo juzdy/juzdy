@@ -1,0 +1,2 @@
+# juzdy
+Djuzdy project template
