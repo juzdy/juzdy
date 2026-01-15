@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: juzdy-web
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html
+      - ./etc/config:/var/www/html/etc/config
+    environment:
+      - APACHE_DOCUMENT_ROOT=/var/www/html
+    restart: unless-stopped
+    networks:
+      - juzdy-network
+
+  db:
+    image: mysql:8.0
+    container_name: juzdy-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: juzdy
+      MYSQL_USER: juzdy
+      MYSQL_PASSWORD: juzdy
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+    restart: unless-stopped
+    networks:
+      - juzdy-network
+
+networks:
+  juzdy-network:
+    driver: bridge
+
+volumes:
+  db-data:
