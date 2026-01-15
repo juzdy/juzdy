@@ -1,0 +1,12 @@
+RewriteEngine On
+
+RewriteRule ^$ pub/index.php [L]
+
+RewriteCond %{REQUEST_URI} !^/pub/
+RewriteCond %{DOCUMENT_ROOT}/pub/%{REQUEST_URI} -f [OR]
+RewriteCond %{DOCUMENT_ROOT}/pub/%{REQUEST_URI} -d
+RewriteRule ^(.*)$ public/$1 [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ pub/index.php?q=$1 [L,QSA]
