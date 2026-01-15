@@ -1,6 +1,9 @@
 # Use PHP 8.0 with Apache
 FROM php:8.0-apache
 
+# Build argument to control development dependencies
+ARG INSTALL_DEV_DEPS=true
+
 # Install system dependencies and PHP extensions
 RUN apt-get update && apt-get install -y \
     git \
@@ -20,7 +23,12 @@ WORKDIR /var/www/html
 COPY . /var/www/html/
 
 # Install dependencies
-RUN composer install --optimize-autoloader --no-interaction
+# Use --no-dev for production builds: docker build --build-arg INSTALL_DEV_DEPS=false
+RUN if [ "$INSTALL_DEV_DEPS" = "true" ]; then \
+        composer install --optimize-autoloader --no-interaction; \
+    else \
+        composer install --no-dev --optimize-autoloader --no-interaction; \
+    fi
 
 # Configure Apache
 # Enable mod_rewrite for .htaccess support

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Docker Stop Script for Juzdy Project
 # This script stops and removes the Docker containers
 

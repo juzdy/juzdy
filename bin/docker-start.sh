@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Docker Start Script for Juzdy Project
 # This script builds and starts the Docker containers
 

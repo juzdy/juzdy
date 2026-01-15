@@ -108,6 +108,9 @@ docker compose restart db     # Restart database only
 ```bash
 docker compose build          # Rebuild images
 docker compose up -d --build  # Rebuild and restart
+
+# For production builds (without dev dependencies):
+docker compose build --build-arg INSTALL_DEV_DEPS=false
 ```
 
 ### Remove Everything (including data)
@@ -158,8 +161,8 @@ docker compose exec web composer install
 This Docker setup is designed for development. For production:
 
 1. Remove volume mounts in `docker-compose.yml` to prevent live code changes
-2. Use environment variables or Docker secrets for all sensitive data (database passwords, API keys, etc.)
-3. Change `composer install` to `composer install --no-dev` in Dockerfile to exclude development dependencies
+2. Build the image with production flag: `docker compose build --build-arg INSTALL_DEV_DEPS=false`
+3. Use environment variables or Docker secrets for all sensitive data (database passwords, API keys, etc.)
 4. Use strong, unique passwords instead of the simple defaults
 5. Consider using a reverse proxy (nginx) in front of Apache
 6. Implement proper logging and monitoring solutions
