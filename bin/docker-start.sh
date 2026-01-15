@@ -15,9 +15,9 @@ if ! command -v docker &> /dev/null; then
     exit 1
 fi
 
-# Check if docker-compose is installed
-if ! command -v docker-compose &> /dev/null; then
-    echo "Error: docker-compose is not installed. Please install docker-compose first."
+# Check if docker compose is available
+if ! docker compose version &> /dev/null; then
+    echo "Error: docker compose is not available. Please install Docker Compose."
     exit 1
 fi
 
@@ -25,11 +25,11 @@ fi
 cd "$(dirname "$0")/.."
 
 echo "Building Docker images..."
-docker-compose build
+docker compose build
 
 echo ""
 echo "Starting containers..."
-docker-compose up -d
+docker compose up -d
 
 echo ""
 echo "======================================"
@@ -48,9 +48,9 @@ echo "  Password: juzdy"
 echo "  Root Password: root"
 echo ""
 echo "Useful commands:"
-echo "  - View logs: docker-compose logs -f"
+echo "  - View logs: docker compose logs -f"
 echo "  - Stop containers: ./bin/docker-stop.sh"
-echo "  - Restart containers: docker-compose restart"
+echo "  - Restart containers: docker compose restart"
 echo "  - Enter web container: docker exec -it juzdy-web bash"
 echo "  - Enter db container: docker exec -it juzdy-db mysql -u juzdy -pjuzdy"
 echo ""

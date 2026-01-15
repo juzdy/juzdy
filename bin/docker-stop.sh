@@ -13,7 +13,7 @@ echo ""
 cd "$(dirname "$0")/.."
 
 echo "Stopping containers..."
-docker-compose down
+docker compose down
 
 echo ""
 echo "======================================"
@@ -21,5 +21,5 @@ echo "Containers stopped successfully!"
 echo "======================================"
 echo ""
 echo "To start again, run: ./bin/docker-start.sh"
-echo "To remove all data (including database), run: docker-compose down -v"
+echo "To remove all data (including database), run: docker compose down -v"
 echo ""

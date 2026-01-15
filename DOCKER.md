@@ -5,7 +5,7 @@ This document describes how to run the Juzdy project using Docker.
 ## Prerequisites
 
 - Docker (version 20.10 or higher)
-- Docker Compose (version 1.29 or higher)
+- Docker Compose (version 1.29 or higher, or Docker Compose plugin v2+)
 
 ## Quick Start
 
@@ -75,9 +75,9 @@ services:
 
 ### View Logs
 ```bash
-docker-compose logs -f        # Follow all logs
-docker-compose logs -f web    # Follow web server logs only
-docker-compose logs -f db     # Follow database logs only
+docker compose logs -f        # Follow all logs
+docker compose logs -f web    # Follow web server logs only
+docker compose logs -f db     # Follow database logs only
 ```
 
 ### Execute Commands in Container
@@ -98,20 +98,20 @@ docker exec -it juzdy-db mysql -u juzdy -pjuzdy juzdy
 
 ### Restart Services
 ```bash
-docker-compose restart        # Restart all services
-docker-compose restart web    # Restart web server only
-docker-compose restart db     # Restart database only
+docker compose restart        # Restart all services
+docker compose restart web    # Restart web server only
+docker compose restart db     # Restart database only
 ```
 
 ### Rebuild Containers
 ```bash
-docker-compose build          # Rebuild images
-docker-compose up -d --build  # Rebuild and restart
+docker compose build          # Rebuild images
+docker compose up -d --build  # Rebuild and restart
 ```
 
 ### Remove Everything (including data)
 ```bash
-docker-compose down -v        # Stop and remove containers, networks, and volumes
+docker compose down -v        # Stop and remove containers, networks, and volumes
 ```
 
 ## Troubleshooting
@@ -128,14 +128,14 @@ docker-compose exec web chown -R www-data:www-data /var/www/html
 ### Container Won't Start
 Check logs for errors:
 ```bash
-docker-compose logs web
-docker-compose logs db
+docker compose logs web
+docker compose logs db
 ```
 
 ### Reset Database
 To completely reset the database:
 ```bash
-docker-compose down -v
+docker compose down -v
 ./bin/docker-start.sh
 ```
 
@@ -149,7 +149,7 @@ The project directory is mounted as a volume, so changes to your code are immedi
 
 However, if you modify `composer.json` or add new dependencies:
 ```bash
-docker-compose exec web composer install
+docker compose exec web composer install
 ```
 
 ## Production Considerations
