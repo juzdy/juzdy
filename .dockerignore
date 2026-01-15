@@ -1,12 +1,10 @@
 .git
 .gitignore
-README.md
 LICENSE
 vendor
 .env
 .env.*
 *.log
-*.md
 .DS_Store
 Thumbs.db
 node_modules

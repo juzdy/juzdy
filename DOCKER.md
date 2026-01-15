@@ -93,7 +93,8 @@ docker exec -it juzdy-web composer update
 docker exec -it juzdy-web php bin/cli list
 
 # Access MySQL
-docker exec -it juzdy-db mysql -u juzdy -pjuzdy juzdy
+docker exec -it juzdy-db bash
+mysql -u juzdy -p  # Enter password when prompted: juzdy
 ```
 
 ### Restart Services
@@ -156,9 +157,12 @@ docker compose exec web composer install
 
 This Docker setup is designed for development. For production:
 
-1. Remove volume mounts in `docker-compose.yml`
-2. Use environment variables for sensitive data
-3. Set `composer install --no-dev` in Dockerfile
-4. Consider using a reverse proxy (nginx)
-5. Implement proper logging and monitoring
-6. Use secrets management for credentials
+1. Remove volume mounts in `docker-compose.yml` to prevent live code changes
+2. Use environment variables or Docker secrets for all sensitive data (database passwords, API keys, etc.)
+3. Change `composer install` to `composer install --no-dev` in Dockerfile to exclude development dependencies
+4. Use strong, unique passwords instead of the simple defaults
+5. Consider using a reverse proxy (nginx) in front of Apache
+6. Implement proper logging and monitoring solutions
+7. Enable HTTPS/TLS with valid certificates
+8. Set up automated backups for the database
+9. Consider using managed database services instead of containerized MySQL for better reliability

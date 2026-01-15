@@ -20,7 +20,7 @@ WORKDIR /var/www/html
 COPY . /var/www/html/
 
 # Install dependencies
-RUN composer install --no-dev --optimize-autoloader --no-interaction
+RUN composer install --optimize-autoloader --no-interaction
 
 # Configure Apache
 # Enable mod_rewrite for .htaccess support
