@@ -1,7 +1,6 @@
 .git
 .gitignore
 LICENSE
-vendor
 .env
 .env.*
 *.log

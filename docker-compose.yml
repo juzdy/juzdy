@@ -18,12 +18,13 @@ services:
     image: mysql:8.0
     container_name: juzdy-db
     environment:
-      # Note: These are default credentials for development only
-      # For production, use environment variables or Docker secrets
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: juzdy
-      MYSQL_USER: juzdy
-      MYSQL_PASSWORD: juzdy
+      # IMPORTANT: Change these credentials for production!
+      # For production, use environment variables: -e MYSQL_ROOT_PASSWORD=$DB_ROOT_PASS
+      # Or use Docker secrets for better security
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-juzdy}
+      MYSQL_USER: ${MYSQL_USER:-juzdy}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-juzdy}
     ports:
       - "3306:3306"
     volumes:

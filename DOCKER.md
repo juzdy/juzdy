@@ -4,8 +4,8 @@ This document describes how to run the Juzdy project using Docker.
 
 ## Prerequisites
 
-- Docker (version 20.10 or higher)
-- Docker Compose (version 1.29 or higher, or Docker Compose plugin v2+)
+- Docker (version 20.10 or higher recommended)
+- Docker Compose (version 2.0 or higher recommended, or Docker Compose plugin v2+)
 
 ## Quick Start
 
@@ -42,6 +42,19 @@ The Docker setup includes:
     - Root password: `root`
 
 ## Configuration
+
+### Environment Variables
+
+You can customize database credentials using environment variables. Create a `.env` file in the project root:
+
+```env
+MYSQL_ROOT_PASSWORD=your_secure_root_password
+MYSQL_DATABASE=juzdy
+MYSQL_USER=juzdy
+MYSQL_PASSWORD=your_secure_password
+```
+
+If no `.env` file is present, default development credentials will be used (see docker-compose.yml).
 
 ### Database Connection
 
@@ -160,12 +173,13 @@ docker compose exec web composer install
 
 This Docker setup is designed for development. For production:
 
-1. Remove volume mounts in `docker-compose.yml` to prevent live code changes
-2. Build the image with production flag: `docker compose build --build-arg INSTALL_DEV_DEPS=false`
-3. Use environment variables or Docker secrets for all sensitive data (database passwords, API keys, etc.)
-4. Use strong, unique passwords instead of the simple defaults
+1. **Security**: Create a `.env` file with strong, unique passwords for all database credentials
+2. Remove volume mounts in `docker-compose.yml` to prevent live code changes
+3. Build the image with production flag: `docker compose build --build-arg INSTALL_DEV_DEPS=false`
+4. Use Docker secrets for even better security in production environments
 5. Consider using a reverse proxy (nginx) in front of Apache
 6. Implement proper logging and monitoring solutions
 7. Enable HTTPS/TLS with valid certificates
 8. Set up automated backups for the database
 9. Consider using managed database services instead of containerized MySQL for better reliability
+10. Never commit `.env` files with production credentials to version control
