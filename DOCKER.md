@@ -122,7 +122,7 @@ If port 8080 or 3306 is already in use, you'll see an error. Change the port in 
 ### Permission Issues
 If you encounter permission issues, try:
 ```bash
-docker-compose exec web chown -R www-data:www-data /var/www/html
+docker compose exec web chown -R www-data:www-data /var/www/html
 ```
 
 ### Container Won't Start

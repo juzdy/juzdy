@@ -26,10 +26,8 @@ RUN composer install --no-dev --optimize-autoloader --no-interaction
 # Enable mod_rewrite for .htaccess support
 RUN a2enmod rewrite
 
-# Update Apache configuration to set DocumentRoot to /var/www/html
-# and allow .htaccess overrides
-RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html|g' /etc/apache2/sites-available/000-default.conf \
-    && sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
+# Allow .htaccess overrides
+RUN sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
 
 # Set proper permissions
 RUN chown -R www-data:www-data /var/www/html \

@@ -10,7 +10,6 @@ services:
       - "8080:80"
     volumes:
       - .:/var/www/html
-      - ./etc/config:/var/www/html/etc/config
     environment:
       - APACHE_DOCUMENT_ROOT=/var/www/html
     restart: unless-stopped
@@ -21,6 +20,8 @@ services:
     image: mysql:8.0
     container_name: juzdy-db
     environment:
+      # Note: These are default credentials for development only
+      # For production, use environment variables or Docker secrets
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: juzdy
       MYSQL_USER: juzdy
