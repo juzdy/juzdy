@@ -1,4 +1,4 @@
 .vscode
-etc/config/env.php
+etc/config/*.local.php
 node_modules
 vendor
