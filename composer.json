@@ -1,6 +1,6 @@
 {
     "name": "juzdy/juzdy",
-    "description": "Skibidi Madness web",
+    "description": "Easy start http project",
     "type": "project",
     "require": {
         "php": ">=8.0",
