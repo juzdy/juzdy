@@ -1,0 +1,18 @@
+{
+    "name": "juzdy/juzdy",
+    "description": "Skibidi Madness web",
+    "type": "project",
+    "require": {
+        "php": ">=8.0",
+        "juzdy/core": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/src/"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    }
+}

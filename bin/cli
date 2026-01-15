@@ -1,0 +1,28 @@
+#!/usr/bin/env php
+<?php
+/**
+ * CLI Application
+ * 
+ * Usage: php bin/cli <command> [arguments]
+ * 
+ * Available commands:
+ *   db:setup    - Set up the database schema
+ *   db:migrate  - Run pending migrations
+ *   db:demo     - Load demo data
+ *   help        - Show help message
+ *   list        - List all commands
+ */
+
+if (php_sapi_name() !== 'cli') {
+    exit('This script can only be run from the command line.');
+}
+
+require_once __DIR__ . '/../vendor/autoload.php';
+
+$app = new \App\Cli\Application();
+
+$app->registerCommand(new \App\Cli\Command\DbSetupCommand());
+$app->registerCommand(new \App\Cli\Command\DbMigrateCommand());
+$app->registerCommand(new \App\Cli\Command\DbDemoCommand());
+
+exit($app->run($argv));

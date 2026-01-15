@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>500 - Server Error</title>
+</head>
+<body>
+    <div class="error-page">
+        <div class="error-overlay"></div>
+        
+        <div class="error-content">
+            <h1 class="error-code">500</h1>
+            <div class="error-actions">
+                <a href="/" class="error-btn error-btn-primary">Return Home</a>
+                <a href="javascript:history.back()" class="error-btn error-btn-secondary">Go Back</a>
+            </div>
+            
+            <?php if (ini_get('display_errors') && isset($errorMessage)): ?>
+            <div class="error-details">
+                <h3>Error Details (Development Mode):</h3>
+                <pre><?= htmlspecialchars($errorMessage) ?></pre>
+                <?php if (isset($errorTrace)): ?>
+                <pre><?= htmlspecialchars($errorTrace) ?></pre>
+                <?php endif; ?>
+            </div>
+            <?php endif; ?>
+        </div>
+    </div>
+</body>
+</html>

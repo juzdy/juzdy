@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found | Skibidi Madness</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/errors.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="error-page">
+        <?php if ($backgroundVideo): ?>
+            <video autoplay loop muted playsinline class="error-video-bg">
+                <source src="<?= htmlspecialchars($backgroundVideo) ?>" type="video/mp4">
+            </video>
+        <?php endif; ?>
+        <div class="error-overlay"></div>
+
+        
+        
+        <div class="error-content">
+            <h1 class="error-code">404</h1>
+            <h2 class="error-title">Page Lost in the Multiverse</h2>
+            <p class="error-text">
+                Oops! The page you're looking for has been consumed by the chaos. 
+                It might have been teleported to another dimension, or it never existed in this timeline.
+            </p>
+            <div class="error-actions">
+                <a href="javascript:history.back()" class="error-btn error-btn-primary">Return Back</a>
+                <a href="/" class="error-btn error-btn-secondary">Home Page</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
