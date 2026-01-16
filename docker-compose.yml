@@ -1,0 +1,41 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: juzdy-web
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html
+    environment:
+      - APACHE_DOCUMENT_ROOT=/var/www/html
+    restart: unless-stopped
+    networks:
+      - juzdy-network
+
+  db:
+    image: mysql:8.0
+    container_name: juzdy-db
+    environment:
+      # IMPORTANT: Change these credentials for production!
+      # For production, use environment variables: -e MYSQL_ROOT_PASSWORD=$DB_ROOT_PASS
+      # Or use Docker secrets for better security
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-juzdy}
+      MYSQL_USER: ${MYSQL_USER:-juzdy}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-juzdy}
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+    restart: unless-stopped
+    networks:
+      - juzdy-network
+
+networks:
+  juzdy-network:
+    driver: bridge
+
+volumes:
+  db-data:

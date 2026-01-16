@@ -1,0 +1,9 @@
+.git
+.gitignore
+LICENSE
+.env
+.env.*
+*.log
+.DS_Store
+Thumbs.db
+node_modules
