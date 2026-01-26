@@ -534,6 +534,7 @@ class Upload extends Handler
 
     private function handleUpload(RequestInterface $request): ResponseInterface
     {
+        // Note: Always validate $_FILES exists and is properly structured
         if (!isset($_FILES['file'])) {
             return $this->showUploadForm('No file selected', false);
         }

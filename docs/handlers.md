@@ -562,6 +562,7 @@ class Upload extends Handler
                 ->body('Method Not Allowed');
         }
 
+        // Note: Always validate $_FILES before processing
         $file = $_FILES['file'] ?? null;
         
         if (!$file) {

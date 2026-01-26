@@ -292,9 +292,10 @@ class RateLimitMiddleware implements MiddlewareInterface
 
     private function getClientIp(RequestInterface $request): string
     {
+        // Note: Validate and sanitize IP addresses in production
         return $request->header('X-Forwarded-For') 
             ?? $request->header('X-Real-IP') 
-            ?? $_SERVER['REMOTE_ADDR'];
+            ?? $_SERVER['REMOTE_ADDR'] ?? '0.0.0.0';
     }
 
     private function rateLimitExceeded(): ResponseInterface
@@ -483,7 +484,7 @@ class MaintenanceModeMiddleware implements MiddlewareInterface
     private function isAdminIp(RequestInterface $request): bool
     {
         $adminIps = ['127.0.0.1', '::1'];
-        $clientIp = $_SERVER['REMOTE_ADDR'];
+        $clientIp = $_SERVER['REMOTE_ADDR'] ?? '';
         return in_array($clientIp, $adminIps);
     }
 
